@@ -30,12 +30,13 @@ def convert(message: telebot.types.Message):
 
         quote, base, amount = values
         total_base = CryptoConverter.convert(quote, base, amount)
+        total_base_result = float(total_base) * float(amount)
     except ConvertionException as e:
         bot.reply_to(message, f'Ошибка пользователя.\n{e}')
     except Exception as e:
         bot.reply_to(message, f'Не удалось обработать команду\n{e}')
     else:
-        text = f'Цена {amount} {quote} в {base} - {total_base}'
+        text = f'Цена {amount} {quote} в {base} - {total_base_result} '
         bot.send_message(message.chat.id, text)
 
 
